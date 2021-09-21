@@ -135,7 +135,8 @@ const RegisterAuth = (props) => {
             </div>
             <div className='input-form'>
               <label>
-                Password: {
+                Password: 
+                {
                   data.password && errorPass
                     ? <span className='error'>
                       Password is
