@@ -1,10 +1,12 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
+
+import ReceptionMainReducer from "../Reducers/ReceptionMainReducer";
 import thunk from "redux-thunk";
-import ReceptionMain from "../Reducers/ReceptionMain";
+
 
 
 const reducers = combineReducers({
-  receptionPage: ReceptionMain
+  receptionPage: ReceptionMainReducer
 })
 
 const store = createStore(reducers, applyMiddleware(thunk));

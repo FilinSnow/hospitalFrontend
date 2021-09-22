@@ -1,10 +1,12 @@
-*,*:before,*:after {
+*,
+*:before,
+*:after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 body {
-  font-family: 'Roboto', serif;
+  font-family: "Roboto", serif;
 }
 .wrapper {
   max-width: 2400px;
@@ -13,7 +15,7 @@ body {
 .container__main {
   height: 100vh;
   max-width: 2400px;
-  background: #CEE8F8;
+  background: #cee8f8;
   margin: 0 auto;
 }
 .auth__header {
@@ -29,18 +31,17 @@ body {
     background: white;
     border: 1px solid lightgray;
     font-size: 24px;
-    
-    // outline: 1px solid gray;
     border-radius: 3px;
   }
 }
+
 .header__icon-title {
   display: flex;
   flex-wrap: wrap;
 }
 .container__auth {
   max-width: 2400px;
-  background: #CEE8F8;
+  background: #cee8f8;
   height: 100vh;
   margin: 0 auto;
   .auth__header {
@@ -48,12 +49,11 @@ body {
     display: flex;
     //align-items: center;
     flex-wrap: wrap;
-    background: #C5E9FF;
+    background: #c5e9ff;
     box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
     .header__title {
       align-self: center;
       margin-left: 75px;
-
     }
     min-height: 117px;
   }
@@ -140,7 +140,6 @@ a {
 }
 
 @media screen and(max-width: 295px) {
-
   .header__title h1 {
     font-size: 30px;
   }
@@ -163,13 +162,13 @@ a {
     }
   }
 }
-input{
+input {
   outline: none;
 }
 .container__reception {
-  padding: 24px;
-  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
-  margin-top: 10px;
+  // padding: 24px;
+  // box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
+  // margin-top: 10px;
 }
 
 .error {
@@ -182,6 +181,15 @@ input{
 
 .container__add-record {
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  
+  padding: 24px;
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-top: 10px;
+}
+.container__table {
+  padding: 24px;
 }
 @media screen and(max-width: 485px) {
   .header__button {
@@ -192,9 +200,72 @@ input{
 .add-record {
   display: flex;
   flex-direction: column;
-  border: 1px solid #000;
+  margin: 0 20px;
 }
 
 .text__record {
   font-size: 18px;
+}
+.container__btn-main {
+  align-self: center;
+}
+.btn-main {
+  padding: 8.5px 42.5px;
+  background: white;
+  border: 1px solid lightgray;
+  font-size: 24px;
+  border-radius: 3px;
+  align-self: center;
+}
+
+#date {
+  height: 100%;
+  padding: 16.5px 14px;
+  border-radius: 3px;
+  font-size: 15px;
+  border: none;
+  outline: 1px solid lightgray;
+  // outline: 1px solid blue;
+}
+.container__table {
+  div {
+    // border: 1px solid #000;
+    // padding: 20px;
+    // border-bottom: none;
+  }
+}
+
+.table__header  {
+  display: flex;
+  justify-content: space-around;
+  background: #C4C4C4;
+  padding: 24px 0 15px 0;
+  div {
+
+    text-align: center;
+  }
+}
+
+.container__record {
+  //border: 1px solid black;
+  display: flex;
+  justify-content: space-around;
+
+  .record__span {
+    border-right: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 20px;
+    word-break: break-word;
+  }
+}
+.record__btn__edit-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.table__main {
+  background: white;
+  border: 1px solid black;
 }
