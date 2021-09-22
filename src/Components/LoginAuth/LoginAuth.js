@@ -83,11 +83,14 @@ const LoginAuth = (props) => {
   return (
     <div className='container__auth'>
       <div className="auth__header">
-        <div className="header__icon">
-          <img src={iconPlus} alt="" />
-        </div>
-        <div className="header__title">
-          <h1>Войти в систему</h1>
+        <div className='header__icon-title'>
+          <div className="header__icon">
+            <img src={iconPlus} alt="" />
+          </div>
+
+          <div className="header__title">
+            <h1>Войти в систему</h1>
+          </div>
         </div>
       </div>
       <div className="auth__main">
@@ -95,7 +98,6 @@ const LoginAuth = (props) => {
           <img src={iconManufacture} alt="" />
         </div>
         <div className="main__auth">
-
           <form className='form__auth'>
             <h3>Войти в систему</h3>
             <div className='input-form'>

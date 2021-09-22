@@ -90,11 +90,14 @@ const RegisterAuth = (props) => {
   return (
     <div className='container__auth'>
       <div className="auth__header">
-        <div className="header__icon">
-          <img src={iconPlus} alt="" />
-        </div>
-        <div className="header__title">
-          <h1>Зарегистрироваться в системе</h1>
+        <div className='header__icon-title'>
+          <div className="header__icon">
+            <img src={iconPlus} alt="" />
+          </div>
+
+          <div className="header__title">
+            <h1>Зарегистрироваться в системе</h1>
+          </div>
         </div>
       </div>
       <div className="auth__main">
