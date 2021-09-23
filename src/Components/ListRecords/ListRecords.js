@@ -16,9 +16,7 @@ import PopupDelete from "../PopupDelete/PopupDelete";
 
 const ListRecords = (props) => {
 
-  useEffect(() => {
-    props.thunkGetAllRecords();
-  }, []);
+  const {sortNameInput, sortDirectionInput} = props;
 
   const [editMode, setEditMode] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
@@ -31,7 +29,7 @@ const ListRecords = (props) => {
           deleteMode
               ? <PopupDelete
                   thunkDeleteRecord={props.thunkDeleteRecord}
-                  records={props.records}
+                  records={props?.records}
                   id={indexRecord}
                   setDeleteMode={setDeleteMode}
               />
@@ -41,7 +39,7 @@ const ListRecords = (props) => {
           editMode
               ? <PopupEdit
                   thunkChangeInfoRecord={props.thunkChangeInfoRecord}
-                  records={props.records}
+                  records={props?.records}
                   id={indexRecord}
                   setEditMode={setEditMode}
               />
@@ -117,16 +115,9 @@ const ListRecords = (props) => {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    records: state.receptionPage.data
-  }
-}
 
-
-export default connect(mapStateToProps,
+export default connect(null,
     {
-      thunkGetAllRecords,
       thunkChangeInfoRecord,
       thunkDeleteRecord
     }

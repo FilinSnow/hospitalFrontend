@@ -55,7 +55,7 @@ const PopupEdit = (props) => {
     props.setEditMode(false);
     props.thunkChangeInfoRecord(obj);
   }
-  const currencies = [
+  const doctors = [
     {
       value: 'Иванов Иван Иванович',
       label: 'Иванов Иван Иванович',
@@ -129,7 +129,7 @@ const PopupEdit = (props) => {
                                 handleChangeEditPopup(e.target.name, e.target.value)
                           }
                       >
-                        {currencies.map((option) => (
+                        {doctors.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
                               {option.label}
                             </MenuItem>
