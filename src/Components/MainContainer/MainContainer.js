@@ -71,20 +71,18 @@ const Main = (props) => {
     }
   };
   const addRecord = () => {
-    const newData = data.date.split('-').reverse().join('-')
     const obj = {
       ...data,
-      date: newData
     };
     setData({
       name: '',
       doctor: '',
       date: '',
       complaint: ''
-    })
+    });
     props.thunkCreateNewRecord(obj)
-    // console.log(obj)
   }
+
 
   return (
       <div className="container__main">
@@ -121,6 +119,7 @@ const Main = (props) => {
                       value={data.name}
                       sx={{
                         background: 'white',
+                        borderRadius: '3px'
                       }}
                       onChange={
                         (e) =>
@@ -145,6 +144,7 @@ const Main = (props) => {
                       onChange={handleChange}
                       sx={{
                         background: 'white',
+                        borderRadius: '3px',
                         width: '300px'
                       }}
                       onChange={
@@ -190,7 +190,8 @@ const Main = (props) => {
                       name='complaint'
                       value={data.complaint}
                       sx={{
-                        background: 'white'
+                        background: 'white',
+                        borderRadius: '3px',
                       }}
                       onChange={
                         (e) =>
@@ -206,12 +207,12 @@ const Main = (props) => {
                           className='btn-main'
                           onClick={() => addRecord()}
                           disabled={
-                            data.name.length
+                            !(data.name.length
                             && data.doctor.length
                             && data.date.length
-                            && data.complaint.length
-                                ? false
-                                : true
+                            && data.complaint.length)
+                                ? true
+                                : false
                           }
                   >
                     Добавить

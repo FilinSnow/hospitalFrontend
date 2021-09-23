@@ -53,4 +53,21 @@ export const thunkCreateNewRecord = (record) => {
   }
 }
 
+export const thunkChangeInfoRecord = (record) => {
+  return dispatch => {
+    return api.changeInfoRecord(record)
+        .then(res => {
+          if (res) {
+            return api.getAllRecords()
+                .then(res => {
+                  if (res) {
+                    dispatch(actionSetRecords(res.data.data));
+                  }
+                })
+          }
+        })
+  }
+}
+
+
 export default ReceptionMainReducer;
