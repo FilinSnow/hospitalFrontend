@@ -68,6 +68,9 @@ const Main = (props) => {
         })
         break;
       }
+      default: {
+        return 1;
+      }
     }
   };
   const addRecord = () => {

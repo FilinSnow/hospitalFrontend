@@ -69,5 +69,20 @@ export const thunkChangeInfoRecord = (record) => {
   }
 }
 
+export const thunkDeleteRecord = (id) => {
+  return dispatch => {
+    return api.deleteRecord(id)
+        .then(res => {
+          if (res) {
+            return api.getAllRecords()
+                .then(res => {
+                  if (res) {
+                    dispatch(actionSetRecords(res.data.data));
+                  }
+                })
+          }
+        })
+  }
+}
 
 export default ReceptionMainReducer;

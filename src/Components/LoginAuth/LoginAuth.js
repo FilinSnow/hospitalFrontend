@@ -55,7 +55,9 @@ const LoginAuth = (props) => {
         });
         break;
       }
-
+      default: {
+        return 1;
+      }
     }
   }
 

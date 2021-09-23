@@ -42,6 +42,9 @@ const PopupEdit = (props) => {
         })
         break;
       }
+      default: {
+        return 1;
+      }
     }
   };
   const saveData = () => {

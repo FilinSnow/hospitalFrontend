@@ -1,11 +1,18 @@
 import React, {useEffect, useState} from "react";
+
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {connect} from "react-redux";
-import {Button, IconButton, TextField} from "@mui/material";
-import PopupEdit from "../PopupEdit/PopupEdit";
+import {IconButton} from "@mui/material";
 
-import {thunkChangeInfoRecord, thunkGetAllRecords} from "../../Reducers/ReceptionMainReducer";
+import {
+  thunkChangeInfoRecord,
+  thunkDeleteRecord,
+  thunkGetAllRecords
+} from "../../Reducers/ReceptionMainReducer";
+
+import PopupEdit from "../PopupEdit/PopupEdit";
+import PopupDelete from "../PopupDelete/PopupDelete";
 
 const ListRecords = (props) => {
 
@@ -21,11 +28,22 @@ const ListRecords = (props) => {
   return (
       <>
         {
+          deleteMode
+              ? <PopupDelete
+                  thunkDeleteRecord={props.thunkDeleteRecord}
+                  records={props.records}
+                  id={indexRecord}
+                  setDeleteMode={setDeleteMode}
+              />
+              : null
+        }
+        {
           editMode
-              ? <PopupEdit thunkChangeInfoRecord={props.thunkChangeInfoRecord}
-                           records={props.records}
-                           id={indexRecord}
-                           setEditMode={setEditMode}
+              ? <PopupEdit
+                  thunkChangeInfoRecord={props.thunkChangeInfoRecord}
+                  records={props.records}
+                  id={indexRecord}
+                  setEditMode={setEditMode}
               />
               : null
         }
@@ -70,8 +88,8 @@ const ListRecords = (props) => {
                     <div>
                       <IconButton aria-label="editIcon"
                                   onClick={() => {
-                                    setIndexRecord(index)
-                                    setEditMode(true)
+                                    setIndexRecord(index);
+                                    setEditMode(true);
                                   }}
                       >
 
@@ -82,7 +100,8 @@ const ListRecords = (props) => {
                     <div>
                       <IconButton aria-label="deleteIcon"
                                   onClick={() => {
-
+                                    setIndexRecord(index);
+                                    setDeleteMode(true);
                                   }}
                       >
 
@@ -105,4 +124,11 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, {thunkGetAllRecords, thunkChangeInfoRecord})(ListRecords);
+export default connect(mapStateToProps,
+    {
+      thunkGetAllRecords,
+      thunkChangeInfoRecord,
+      thunkDeleteRecord
+    }
+)
+(ListRecords);
