@@ -1,40 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 
-import iconPlus from '../../img/plus.svg';
-import iconManufacture from '../../img/manufacture.svg';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
 import Button from '@mui/material/Button';
 import { Box } from "@mui/material";
 
+import iconPlus from '../../img/plus.svg';
+import iconManufacture from '../../img/manufacture.svg';
+import { connect } from "react-redux";
+import { thunkLogin } from "../../Reducers/ReceptionMainReducer";
 
 
 const LoginAuth = (props) => {
 
   const [data, setData] = useState({
-    login: '',
+    username: '',
     password: '',
   });
   const [errorLogin, setErrorLogin] = useState(false);
   const [errorPass, setErrorPass] = useState(false);
   const history = useHistory();
-
+  // useEffect(() => {
+  //   if(props.token) {
+  //     history.push('/login')
+  //   }
+  //   history.push('/')
+  // })
   const goRegisterPage = () => {
     history.push('/register')
+  }
+  const login = () => {
+    props.thunkLogin(data)
+      .then(res => {
+        if (res) {
+          localStorage.setItem('token', JSON.stringify(`Bearer ${res.data.token}`));
+          props.setFlag(!props.flag);
+        }
+      });
   }
 
   const changeDataAuth = (nameInput, value) => {
     switch (nameInput) {
-      case 'login': {
-        if (!/^[a-z]*$/i.test(value) || value.length < 6) {
+      case 'username': {
+        if (!/^[a-zA-Z]*\d*$/i.test(value) || value.length < 6) {
           setErrorLogin(true);
         } else {
           setErrorLogin(false);
         }
         setData({
           ...data,
-          login: value,
+          username: value,
         });
         break;
       }
@@ -65,11 +81,9 @@ const LoginAuth = (props) => {
     palette: {
       primary: {
         bd: grey[900],
-        // Purple and green play nicely together.
         main: grey[400],
       },
       secondary: {
-        // This is green.A700 as hex.
         main: '#11cb5f',
       },
       overrides: {
@@ -105,20 +119,14 @@ const LoginAuth = (props) => {
             <div className='input-form'>
               <label>
                 Login:
-                {
-                  data.login.length && errorLogin
-                    ? <span className='error'>
-                      Password is less then 6
-                    </span>
-                    : null
-                }
+
                 <div>
                   <input type="text"
-                    name="login"
+                    name="username"
                     placeholder='Login'
-                    value={data.login}
+                    value={data.username}
                     className={
-                      data.login.length && errorLogin
+                      data.username.length && errorLogin
                         ? 'errorInput'
                         : null
                     }
@@ -127,22 +135,20 @@ const LoginAuth = (props) => {
                         e.target.value)
                     }
                   />
+                  {
+                    data.username.length && errorLogin
+                      ? <span className='error'>
+                        Login is less then 6
+                      </span>
+                      : null
+                  }
                 </div>
               </label>
             </div>
             <div className='input-form'>
               <label>
                 Password:
-                {
-                  data.password && errorPass
-                    ? <span className='error'>
-                      Password is
-                      less than 6 not contain
-                      latin letters not contain
-                      1 number
-                    </span>
-                    : null
-                }
+
                 <div>
                   <input type="password"
                     name="password"
@@ -158,6 +164,16 @@ const LoginAuth = (props) => {
                         e.target.value)
                     }
                   />
+                  {
+                    data.password && errorPass
+                      ? <span className='error'>
+                        Password is
+                        less than 6 not contain
+                        latin letters not contain
+                        1 number
+                      </span>
+                      : null
+                  }
                 </div>
               </label>
             </div>
@@ -176,11 +192,12 @@ const LoginAuth = (props) => {
                   }}
                   variant="outlined"
                   disabled={
-                    data.login
+                    data.username
                       && data.password
                       ? false
                       : true
                   }
+                  onClick={() => login()}
                 >
                   Войти
                 </Button>
@@ -211,4 +228,7 @@ const LoginAuth = (props) => {
   );
 }
 
-export default LoginAuth;
+
+export default connect(null, {
+  thunkLogin
+})(LoginAuth);

@@ -1,27 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import RegisterAuth from "./Components/RegisterAuth/RegisterAuth";
-import LoginAuth from "./Components/LoginAuth/LoginAuth";
 
 
 import './App.scss';
-import { Route } from "react-router";
+import { Redirect, Route, Switch, useHistory } from "react-router";
 import MainContainer from "./Components/MainContainer/MainContainer";
+import LoginAuth from "./Components/LoginAuth/LoginAuth";
+import { connect } from "react-redux";
 
 
+const App = (props) => {
+  // console.log(props);
+  const history = useHistory();
+  const [flag, setFlag] = useState(false);
+  const token = JSON.parse(localStorage.getItem('token'));
+  useEffect(() => {
+    console.log(token);
+      // setFlag(!flag)
+  }, [token])
 
-
-const App = () => {
-
+  // console.log(flag);
   return (
-      <div className="wrapper">
-         {/* <RegisterAuth /> */}
-        {/* <LoginAuth /> */}
-        <MainContainer />
-        {/* <Route path='/' render={() => <MainContentContainer />}/> */}
-        <Route path='/register' render={() => <RegisterAuth />}/>
-        <Route path='/login' render={() => <LoginAuth />}/>
-      </div>
+    <div className="wrapper">
+ 
+        {token 
+        ? <Redirect to='/' />
+        : <Redirect to='/login' />
+      }
+        <Route exact path='/' component={() =>
+          <MainContainer
+            setFlag={setFlag}
+            flag={flag}
+            token={token}
+            userId={props.userId}
+          />} />
+        <Route path='/login' component={() => <LoginAuth setFlag={setFlag} flag={flag} token={token}/>} />
+        <Route path='/register' component={() => <RegisterAuth setFlag={setFlag} flag={flag} token={token}/>} />
+        {/* <Redirect to='/login' /> */}
+  
+    </div>
   );
 }
 
-export default App;
+const mapStateProps = (state) => {
+  return {
+    userId: state.receptionPage.userId
+  }
+}
+
+export default connect(mapStateProps, null)(App);

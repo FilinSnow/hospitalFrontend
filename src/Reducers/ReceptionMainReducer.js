@@ -1,9 +1,11 @@
 import api from "../api/api";
 
 const SETDATA = 'SETDATA';
+const SETUSERID = 'SETUSERID';
 
 const initialState = {
-  data: []
+  data: [],
+  userId: ''
 }
 
 const ReceptionMainReducer = (state = initialState, action) => {
@@ -12,6 +14,12 @@ const ReceptionMainReducer = (state = initialState, action) => {
       return {
         ...state,
         data: action.data,
+      }
+    }
+    case SETUSERID: {
+      return {
+        ...state,
+        userId: action.userId,
       }
     }
     default: {
@@ -27,6 +35,12 @@ export const actionSetRecords = (data) => {
   }
 }
 
+export const actionSetIdUser = (userId) => {
+  return {
+    type: SETUSERID,
+    userId
+  }
+}
 export const thunkGetAllRecords = () => {
   return dispatch => {
     return api.getAllRecords()
@@ -80,6 +94,30 @@ export const thunkDeleteRecord = (id) => {
                     dispatch(actionSetRecords(res.data.data));
                   }
                 })
+          }
+        })
+  }
+}
+
+export const thunkLogin = (data) => {
+  return dispatch => {
+    return api.login(data)
+        .then(res => {
+          if (res) {
+            dispatch(actionSetIdUser(res.data.user.id));
+            return res;
+          }
+        })
+  }
+}
+
+export const thunkRegister = (data) => {
+  return dispatch => {
+    return api.register(data)
+        .then(res => {
+          if (res) {
+            dispatch(actionSetIdUser(res.data.user.id));
+            return res;
           }
         })
   }
