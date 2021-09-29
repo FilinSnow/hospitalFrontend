@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { Box } from "@mui/system";
-import { TextField } from "@mui/material";
+import React, {useEffect, useState} from "react";
+import {connect} from "react-redux";
+import {Box} from "@mui/system";
+import {TextField} from "@mui/material";
 import MenuItem from '@mui/material/MenuItem';
 
 
-import { thunkCreateNewRecord, thunkGetAllRecords }
+import {thunkCreateNewRecord, thunkGetAllRecords}
   from "../../Reducers/ReceptionMainReducer";
 
 import ListRecords from "../ListRecords/ListRecords";
 
 import iconPlus from '../../img/plus.svg';
 import iconAddFilter from '../../img/filterPlus.svg';
-import iconDeleteFilter from '../../img/deleteFilter.svg'
-import AuthHOC from "../../hoc/AuthHOC";
-import { Redirect, useHistory } from "react-router";
+import iconDeleteFilter from '../../img/deleteFilter.svg';
+
 
 const Main = (props) => {
   const [data, setData] = useState({
@@ -23,7 +22,6 @@ const Main = (props) => {
     date: '',
     complaint: ''
   });
-  console.log(1);
   useEffect(() => {
     props.thunkGetAllRecords();
   }, []);
@@ -214,7 +212,6 @@ const Main = (props) => {
       after: '',
     })
     props.thunkGetAllRecords();
-
   }
   return (
     <div className="container__main">
@@ -222,7 +219,7 @@ const Main = (props) => {
         <div className="auth__header">
           <div className='header__icon-title'>
             <div className="header__icon">
-              <img src={iconPlus} alt="" />
+              <img src={iconPlus} alt=""/>
             </div>
 
             <div className="header__title">
@@ -246,9 +243,9 @@ const Main = (props) => {
         <div className="container__reception">
           <Box className='container__add-record'>
             <Box className='add-record'
-              sx={{ display: 'flex' }}
+                 sx={{display: 'flex'}}
             >
-              <Box sx={{ mb: '8px' }}>
+              <Box sx={{mb: '8px'}}>
                 <span className='text__record'>Имя:</span>
               </Box>
               <Box>
@@ -268,9 +265,9 @@ const Main = (props) => {
               </Box>
             </Box>
             <Box className='add-record'
-              sx={{ display: 'flex' }}
+                 sx={{display: 'flex'}}
             >
-              <Box sx={{ mb: '8px' }}>
+              <Box sx={{mb: '8px'}}>
                 <span className='text__record'>Врач:</span>
               </Box>
               <Box>
@@ -298,28 +295,28 @@ const Main = (props) => {
               </Box>
             </Box>
             <Box className='add-record'
-              sx={{ display: 'flex' }}
+                 sx={{display: 'flex'}}
             >
-              <Box sx={{ mb: '8px' }}>
+              <Box sx={{mb: '8px'}}>
                 <span className='text__record'>Дата:</span>
               </Box>
               <Box>
 
                 <input type="date"
-                  id="date"
-                  name="date"
-                  value={data.date}
-                  onChange={
-                    (e) =>
-                      handleChange(e.target.name, e.target.value)
-                  }
+                       id="date"
+                       name="date"
+                       value={data.date}
+                       onChange={
+                         (e) =>
+                           handleChange(e.target.name, e.target.value)
+                       }
                 />
               </Box>
             </Box>
             <Box className='add-record'
-              sx={{ display: 'flex' }}
+                 sx={{display: 'flex'}}
             >
-              <Box sx={{ mb: '8px' }}>
+              <Box sx={{mb: '8px'}}>
                 <span className='text__record'>Жалобы:</span>
               </Box>
               <Box>
@@ -338,19 +335,19 @@ const Main = (props) => {
                 </TextField>
               </Box>
             </Box>
-            <Box sx={{ alignSelf: 'end' }}>
+            <Box sx={{alignSelf: 'end'}}>
               <div className='container__btn-main'>
-                <button style={{ padding: '13.5px 14px' }}
-                  className='btn-main'
-                  onClick={() => addRecord()}
-                  disabled={
-                    !(data.name.length
-                      && data.doctor.length
-                      && data.date.length
-                      && data.complaint.length)
-                      ? true
-                      : false
-                  }
+                <button style={{padding: '13.5px 14px'}}
+                        className='btn-main'
+                        onClick={() => addRecord()}
+                        disabled={
+                          !(data.name.length
+                            && data.doctor.length
+                            && data.date.length
+                            && data.complaint.length)
+                            ? true
+                            : false
+                        }
                 >
                   Добавить
                 </button>
@@ -359,21 +356,21 @@ const Main = (props) => {
             </Box>
           </Box>
           <Box className='sortBy__container'
-            sx={{
-              display: 'flex',
-              justifyContent: 'end',
-              padding: '24px',
-              flexWrap: 'wrap'
-            }}
+               sx={{
+                 display: 'flex',
+                 justifyContent: 'end',
+                 padding: '24px',
+                 flexWrap: 'wrap'
+               }}
           >
             <Box className='sortBy'
-              sx={{
-                marginRight: '18px',
-                display: 'flex',
-                flexWrap: 'wrap'
-              }}
+                 sx={{
+                   marginRight: '18px',
+                   display: 'flex',
+                   flexWrap: 'wrap'
+                 }}
             >
-              <Box sx={{ alignSelf: 'center' }}>
+              <Box sx={{alignSelf: 'center'}}>
                 <span style={{
                   fontSize: '18px',
                   marginRight: '18px'
@@ -408,8 +405,8 @@ const Main = (props) => {
             </Box>
             {
               sortDirectionShow
-                ? <Box className='direction' sx={{ display: 'flex' }}>
-                  <Box sx={{ alignSelf: 'center' }}>
+                ? <Box className='direction' sx={{display: 'flex'}}>
+                  <Box sx={{alignSelf: 'center'}}>
                     <span style={{
                       fontSize: '18px',
                       marginRight: '18px'
@@ -445,8 +442,8 @@ const Main = (props) => {
                 : null
             }
             {
-              <Box sx={{ alignSelf: 'center', display: 'flex', ml: '20px' }}>
-                <Box sx={{ alignSelf: 'center' }}>
+              <Box sx={{alignSelf: 'center', display: 'flex', ml: '20px'}}>
+                <Box sx={{alignSelf: 'center'}}>
                   <span style={{
                     fontSize: '18px',
                     marginRight: '18px'
@@ -458,13 +455,13 @@ const Main = (props) => {
                 <Box onClick={() => {
                   setShowFilter(!showFilter)
                 }}
-                  sx={{
-                    alignSelf: 'center',
-                    cursor: 'pointer',
-                    display: 'flex'
-                  }}
+                     sx={{
+                       alignSelf: 'center',
+                       cursor: 'pointer',
+                       display: 'flex'
+                     }}
                 >
-                  <img src={iconAddFilter} alt="" />
+                  <img src={iconAddFilter} alt=""/>
                 </Box>
               </Box>
             }
@@ -473,9 +470,9 @@ const Main = (props) => {
           {
             showFilter
               ? <Box className='container__filter'
-                sx={{ padding: '0px 24px', display: 'flex', justifyContent: 'center' }}
+                     sx={{padding: '0px 24px', display: 'flex', justifyContent: 'center', flexWrap: 'wrap'}}
               >
-                <Box className='filter__before' sx={{ display: 'flex' }}>
+                <Box className='filter__before' sx={{display: 'flex'}}>
                   <Box sx={{
                     mr: '8px',
                     alignSelf: 'center'
@@ -486,19 +483,19 @@ const Main = (props) => {
                   <Box>
 
                     <input type="date"
-                      id="date"
-                      name="before"
-                      value={filterInput.before}
-                      onChange={
-                        (e) => {
-                          changeFilterInput(e.target.name, e.target.value);
-                        }
+                           id="date"
+                           name="before"
+                           value={filterInput.before}
+                           onChange={
+                             (e) => {
+                               changeFilterInput(e.target.name, e.target.value);
+                             }
 
-                      }
+                           }
                     />
                   </Box>
                 </Box>
-                <Box className='filter__after' sx={{ padding: '0px 24px', display: 'flex' }}>
+                <Box className='filter__after' sx={{padding: '0px 24px', display: 'flex'}}>
                   <Box sx={{
                     mr: '8px',
                     alignSelf: 'center'
@@ -509,14 +506,14 @@ const Main = (props) => {
                   <Box>
 
                     <input type="date"
-                      id="date"
-                      name="after"
-                      value={filterInput.after}
-                      onChange={
-                        (e) => {
-                          changeFilterInput(e.target.name, e.target.value);
-                        }
-                      }
+                           id="date"
+                           name="after"
+                           value={filterInput.after}
+                           onChange={
+                             (e) => {
+                               changeFilterInput(e.target.name, e.target.value);
+                             }
+                           }
                     />
                   </Box>
                 </Box>
@@ -538,37 +535,37 @@ const Main = (props) => {
                     marginLeft: '20px',
                     cursor: 'pointer'
                   }}
-                  onClick={() => deleteFilter()}
+                     onClick={() => deleteFilter()}
                 >
-                  <img src={iconDeleteFilter} alt="" />
+                  <img src={iconDeleteFilter} alt=""/>
                 </Box>
               </Box>
               : null
           }
-          
+
           <Box className='container__table'>
             <div className='table-content'>
               <div className="table__header">
-                <div style={{ width: '25%' }}>
+                <div style={{width: '25%'}}>
                   <span>Имя</span>
                 </div>
-                <div style={{ width: '25%' }}>
+                <div style={{width: '25%'}}>
                   <span>Врач</span>
                 </div>
-                <div style={{ width: '17%' }}>
+                <div style={{width: '17%'}}>
                   <span>Дата</span>
                 </div>
-                <div style={{ width: '21%' }}>
+                <div style={{width: '21%'}}>
                   <span>Жалобы</span>
                 </div>
-                <div style={{ width: '11%' }}>
+                <div style={{width: '11%'}}>
                   <span></span>
                 </div>
               </div>
               <div className="table__main">
                 <ListRecords records={records}
-                  sortNameInput={sortNameInput}
-                  sortDirectionInput={sortDirectionInput}
+                             sortNameInput={sortNameInput}
+                             sortDirectionInput={sortDirectionInput}
                 />
               </div>
             </div>
@@ -592,5 +589,5 @@ const MainContainer = connect(mapStateToProps,
     thunkGetAllRecords
   }
 )
-  (Main);
+(Main);
 export default MainContainer;

@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 
-import iconPlus from '../../img/plus.svg';
-import iconManufacture from '../../img/manufacture.svg';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { grey } from '@mui/material/colors';
-import Button from '@mui/material/Button';
-import { Box } from "@mui/material";
 import { useHistory } from "react-router";
 import {connect} from "react-redux";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from '@mui/material/Alert';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import { grey } from '@mui/material/colors';
+import { Box } from "@mui/material";
+
 import {thunkRegister} from "../../Reducers/ReceptionMainReducer";
+
+import iconPlus from '../../img/plus.svg';
+import iconManufacture from '../../img/manufacture.svg';
 
 const RegisterAuth = (props) => {
   const [data, setData] = useState({
@@ -19,10 +23,14 @@ const RegisterAuth = (props) => {
   const [errorLogin, setErrorLogin] = useState(false);
   const [errorPass, setErrorPass] = useState(false);
   const [errorRepPass, setErrorRepPass] = useState(false);
+  const [errorText, setErrorText] = useState('');
+  const [open, setOpen] = useState(false);
   const history = useHistory();
+
   const goLoginPage = () => {
     history.push('/login')
-  }
+  };
+
   const changeDataAuth = (nameInput, value) => {
     switch (nameInput) {
       case 'username': {
@@ -67,7 +75,16 @@ const RegisterAuth = (props) => {
         return 1;
       }
     }
-  }
+  };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
   const register = () => {
     props.thunkRegister(data)
       .then(res => {
@@ -75,8 +92,13 @@ const RegisterAuth = (props) => {
           localStorage.setItem('token', JSON.stringify(`Bearer ${res.data.token}`));
           props.setFlag(!props.flag);
         }
+      })
+      .catch(err => {
+        setErrorText(err.response.data.message);
+        setOpen(true);
       });
-  }
+  };
+
   const theme = createTheme({
     palette: {
       primary: {
@@ -99,7 +121,7 @@ const RegisterAuth = (props) => {
   });
 
   return (
-    <div className='container__auth'>
+    <div className='container__auth register'>
       <div className="auth__header">
         <div className='header__icon-title'>
           <div className="header__icon">
@@ -249,6 +271,15 @@ const RegisterAuth = (props) => {
               </ThemeProvider>
             </Box>
           </form>
+          <Snackbar
+            open={open}
+            autoHideDuration={3000}
+            onClose={handleClose}
+          >
+            <Alert onClose={handleClose} severity="error" sx={{width: '100%'}}>
+              {errorText}
+            </Alert>
+          </Snackbar>
         </div>
       </div>
     </div>
