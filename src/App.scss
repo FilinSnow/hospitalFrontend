@@ -59,13 +59,12 @@ body {
     flex-wrap: wrap;
     background: #c5e9ff;
     box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
+    min-height: 117px;
 
     .header__title {
       align-self: center;
       margin-left: 75px;
     }
-
-    min-height: 117px;
   }
 }
 
@@ -83,7 +82,6 @@ a {
   margin-top: 40px;
   display: flex;
   justify-content: center;
-
   flex-wrap: wrap;
 
   .main__icon {
@@ -189,7 +187,6 @@ input {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-
   padding: 24px;
   box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
   margin-top: 10px;
@@ -227,7 +224,9 @@ input {
   border-radius: 3px;
   align-self: center;
 }
-
+.container__btn-main .btn-main {
+  padding: 13.5px 14px;
+}
 #date {
   height: 100%;
   padding: 16.5px 14px;
@@ -299,13 +298,11 @@ input {
   .container__content {
     background: white;
     width: 642px;
-
     border-radius: 3px 3px 0 0;
 
     .content__header {
       padding: 24px 0 24px 40px;
       border-radius: 3px 3px 0 0;
-
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
   }
@@ -320,7 +317,7 @@ button.btn__cancel:hover {
   background: none;
   border-color: gray;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-  border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
 }
 
@@ -357,9 +354,10 @@ button.btn__save:hover {
     width: 700px;
     margin: 0 auto;
     padding: 0;
-    overflow-x: scroll; /* прокрутка по горизонтали */
+    overflow-x: scroll;
     overflow-y: scroll;
   }
+
   .table-content {
     width: 788px;
   }
@@ -401,30 +399,9 @@ button.btn__save:hover {
   }
 }
 
-@media screen and (max-width: 685px) {
-  .container__main {
-    // height: 100%;
-  }
-}
-
-@media screen and (min-width: 280px) and (max-width: 1014px) {
-  .container__auth {
-    //height: 100%;
-  }
-}
-
 @media screen and (max-width: 719px) {
   .container__auth {
     height: 100%;
-  }
-}
-
-@media screen and (min-width: 280px) and (max-width: 1075px) {
-  .container__main {
-    // height: 0vh;
-    .container__auth {
-      // height: 0vh;
-    }
   }
 }
 
@@ -445,12 +422,6 @@ button.btn__save:hover {
 @media screen and (max-width: 420px) {
   .container__auth .auth__header .header__title h1 {
     font-size: 30px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .container__auth.register {
-    //height: 100%;
   }
 }
 
@@ -500,14 +471,21 @@ button.btn__save:hover {
   .filter__before {
     margin-bottom: 15px;
   }
+
   .filter__after {
     margin-bottom: 15px;
   }
+
   .container__filter {
     margin-bottom: 15px;
   }
 }
-
+.container__filter {
+  padding: 0px 24px;
+  display: flex; 
+  justify-content: center;
+  flex-wrap: wrap;
+}
 @media screen and (max-width: 640px) {
   .container__btn-main {
     margin-top: 15px;
@@ -519,7 +497,60 @@ button.btn__save:hover {
     width: 100px;
     justify-content: center;
   }
+
   .add-record .MuiFormControl-root.MuiTextField-root.css-orn58g-MuiFormControl-root-MuiTextField-root {
     width: 220px;
   }
+}
+.MuiBox-root.css-ckyhk3 .css-1mkypqy-MuiButtonBase-root-MuiButton-root {
+  color: black;
+  text-transform: none;
+}
+.add-record {
+  display: flex;
+}
+.sortBy__container {
+  display: flex;
+  justify-content: end;
+  padding: 24px;
+  flex-wrap: wrap;
+}
+.sortBy {
+  margin-right: 18px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.table__header {
+  & div:first-child {
+    width: 25%;
+  }
+  & div:nth-child(2) {
+    width: 25%;
+  }
+  & div:nth-child(3) {
+    width: 17%;
+  }
+  & div:nth-child(4) {
+    width: 21%;
+  }
+  & div:last-child {
+    width: 11%;
+  }
+} 
+@media screen and (max-width: 1280px) {
+  .container__btn-main .btn-main {
+    margin-top: 15px;
+  }
+  .container__auth.register {
+    height: 100vh;
+  }
+  .container__main .container__auth {
+    height: auto;
+  }
+}
+
+.filter-add {
+  align-self: center; 
+  display: flex; 
+  margin-left: 20px;
 }

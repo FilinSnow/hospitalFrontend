@@ -4,7 +4,7 @@ import {Redirect} from "react-router";
 
 const AuthHOC = (Component) => {
   
-  const token = JSON.parse(localStorage.getItem('token'));
+  const token = localStorage.getItem('token');
   const showComponent = (props) => {
     console.log(props);
     if (token) {

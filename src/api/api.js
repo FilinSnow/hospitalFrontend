@@ -4,7 +4,7 @@ import axios from "axios";
 
 const api = {
     getAllRecords: async () => {
-        const token = JSON.parse(localStorage.getItem('token'));
+        const token = localStorage.getItem('token');
         return await axios.request({
             url: 'http://localhost:4000/getAllRecords',
             method: 'get',
@@ -18,7 +18,7 @@ const api = {
     },
     createNewRecord: async (record) => {
         console.log(record);
-        const token = JSON.parse(localStorage.getItem('token'));
+        const token = localStorage.getItem('token');
         return await axios.request({
             url: 'http://localhost:4000/createNewRecord',
             method: 'post',
@@ -31,7 +31,7 @@ const api = {
         })
     },
     changeInfoRecord: async (record) => {
-        const token = JSON.parse(localStorage.getItem('token'));
+        const token = localStorage.getItem('token');
         return await axios.request(
             {
                 url: 'http://localhost:4000/updateInfoRecord',
@@ -46,7 +46,7 @@ const api = {
         )
     },
     deleteRecord: async (id) => {
-        const token = JSON.parse(localStorage.getItem('token'));
+        const token = localStorage.getItem('token');
         return await axios.request({
             url: `http://localhost:4000/deleteRecord/${id}`,
             method: 'delete',

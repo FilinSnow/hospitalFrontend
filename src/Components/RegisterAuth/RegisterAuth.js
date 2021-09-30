@@ -1,16 +1,13 @@
 import React, { useState } from "react";
-
 import { useHistory } from "react-router";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from '@mui/material/Alert';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { grey } from '@mui/material/colors';
 import { Box } from "@mui/material";
-
-import {thunkRegister} from "../../Reducers/ReceptionMainReducer";
-
+import { thunkRegister } from "../../Reducers/ReceptionMainReducer";
 import iconPlus from '../../img/plus.svg';
 import iconManufacture from '../../img/manufacture.svg';
 
@@ -20,11 +17,16 @@ const RegisterAuth = (props) => {
     password: '',
     repPassword: ''
   });
+  const {username, password, repPassword} = data;
+
   const [errorLogin, setErrorLogin] = useState(false);
+
   const [errorPass, setErrorPass] = useState(false);
+
   const [errorRepPass, setErrorRepPass] = useState(false);
-  const [errorText, setErrorText] = useState('');
+
   const [open, setOpen] = useState(false);
+
   const history = useHistory();
 
   const goLoginPage = () => {
@@ -76,25 +78,27 @@ const RegisterAuth = (props) => {
       }
     }
   };
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
     setOpen(false);
   };
-  const Alert = React.forwardRef(function Alert(props, ref) {
+
+  const Alert = React.forwardRef((props, ref) => {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
+
   const register = () => {
     props.thunkRegister(data)
       .then(res => {
         if (res) {
-          localStorage.setItem('token', JSON.stringify(`Bearer ${res.data.token}`));
+          localStorage.setItem('token', `Bearer ${res.data.token}`);
           props.setFlag(!props.flag);
         }
       })
       .catch(err => {
-        setErrorText(err.response.data.message);
         setOpen(true);
       });
   };
@@ -145,7 +149,7 @@ const RegisterAuth = (props) => {
               <label>
                 Login:
                 {
-                  data.username.length && errorLogin
+                  username.length && errorLogin
                     ? <span className='error'>
                       Login is less then 6
                     </span>
@@ -155,15 +159,14 @@ const RegisterAuth = (props) => {
                   <input type="text"
                     name="username"
                     placeholder='Login'
-                    value={data.username}
+                    value={username}
                     className={
-                      data.username.length && errorLogin
+                      username.length && errorLogin
                         ? 'errorInput'
                         : null
                     }
                     onChange={(e) =>
-                      changeDataAuth(e.target.name,
-                        e.target.value)
+                      changeDataAuth(e.target.name, e.target.value)
                     }
                   />
                 </div>
@@ -173,7 +176,7 @@ const RegisterAuth = (props) => {
               <label>
                 Password:
                 {
-                  data.password && errorPass
+                  password && errorPass
                     ? <span className='error'>
                       Password is
                       less than 6 not contain
@@ -187,11 +190,11 @@ const RegisterAuth = (props) => {
                     name="password"
                     placeholder='Password'
                     className={
-                      data.password && errorPass
+                      password && errorPass
                         ? 'errorInput'
                         : null
                     }
-                    value={data.password}
+                    value={password}
                     onChange={(e) =>
                       changeDataAuth(e.target.name,
                         e.target.value)
@@ -203,7 +206,7 @@ const RegisterAuth = (props) => {
             <div className='input-form'>
               <label>
                 Repeat Password: {
-                  data.repPassword && errorRepPass
+                  repPassword && errorRepPass
                     ? <span className='error'>
                       Password different
                     </span>
@@ -213,15 +216,14 @@ const RegisterAuth = (props) => {
                   <input type="password"
                     name="repPassword"
                     placeholder='Password'
-                    value={data.repPassword}
+                    value={repPassword}
                     className={
-                      data.repPassword && errorRepPass
+                      repPassword && errorRepPass
                         ? 'errorInput'
                         : null
                     }
                     onChange={(e) =>
-                      changeDataAuth(e.target.name,
-                        e.target.value)
+                      changeDataAuth(e.target.name, e.target.value)
                     }
                   />
                 </div>
@@ -240,11 +242,9 @@ const RegisterAuth = (props) => {
                   }}
                   variant="outlined"
                   disabled={
-                    data.username
-                      && data.password
-                      && data.password === data.repPassword
-                      ? false
-                      : true
+                    !(username
+                      && password
+                      && password === repPassword)
                   }
                   onClick={() => { register() }}
                 >
@@ -276,8 +276,8 @@ const RegisterAuth = (props) => {
             autoHideDuration={3000}
             onClose={handleClose}
           >
-            <Alert onClose={handleClose} severity="error" sx={{width: '100%'}}>
-              {errorText}
+            <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+              Такой пользователь уже существует
             </Alert>
           </Snackbar>
         </div>
@@ -286,4 +286,4 @@ const RegisterAuth = (props) => {
   );
 }
 
-export default connect(null, {thunkRegister})(RegisterAuth);
+export default connect(null, { thunkRegister })(RegisterAuth);

@@ -19,7 +19,7 @@ const ListRecords = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
   const [indexRecord, setIndexRecord] = useState(0);
-  const userId = JSON.parse(localStorage.getItem('userId'));
+  const userId = localStorage.getItem('userId');
 
   return (
     <>

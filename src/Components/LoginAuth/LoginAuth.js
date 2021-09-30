@@ -1,15 +1,13 @@
-import React, {useState, useEffect} from "react";
-import {useHistory} from "react-router";
-import {connect} from "react-redux";
+import React, { useState } from "react";
+import { useHistory } from "react-router";
+import { connect } from "react-redux";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {grey} from '@mui/material/colors';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { grey } from '@mui/material/colors';
 import Button from '@mui/material/Button';
-import {Box} from "@mui/material";
-
-import {thunkLogin} from "../../Reducers/ReceptionMainReducer";
-
+import { Box } from "@mui/material";
+import { thunkLogin } from "../../Reducers/ReceptionMainReducer";
 import iconPlus from '../../img/plus.svg';
 import iconManufacture from '../../img/manufacture.svg';
 
@@ -20,9 +18,12 @@ const LoginAuth = (props) => {
     username: '',
     password: '',
   });
+  const {username, password} = data;
+
   const [errorLogin, setErrorLogin] = useState(false);
+
   const [errorPass, setErrorPass] = useState(false);
-  const [errorText, setErrorText] = useState('');
+
   const [open, setOpen] = useState(false);
 
   const history = useHistory();
@@ -35,12 +36,11 @@ const LoginAuth = (props) => {
     props.thunkLogin(data)
       .then((res) => {
         if (res) {
-          localStorage.setItem('token', JSON.stringify(`Bearer ${res.data.token}`));
+          localStorage.setItem('token', `Bearer ${res.data.token}`);
           props.setFlag(!props.flag);
         }
       })
       .catch(err => {
-        setErrorText(err.response.data.message);
         setOpen(true);
       });
   };
@@ -79,15 +79,18 @@ const LoginAuth = (props) => {
       }
     }
   };
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
     setOpen(false);
   };
-  const Alert = React.forwardRef(function Alert(props, ref) {
+
+  const Alert = React.forwardRef((props, ref) => {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
+
   const theme = createTheme({
     palette: {
       primary: {
@@ -112,7 +115,7 @@ const LoginAuth = (props) => {
       <div className="auth__header">
         <div className='header__icon-title'>
           <div className="header__icon">
-            <img src={iconPlus} alt=""/>
+            <img src={iconPlus} alt="" />
           </div>
 
           <div className="header__title">
@@ -122,7 +125,7 @@ const LoginAuth = (props) => {
       </div>
       <div className="auth__main">
         <div className="main__icon">
-          <img src={iconManufacture} alt=""/>
+          <img src={iconManufacture} alt="" />
         </div>
         <div className="main__auth">
           <form className='form__auth'>
@@ -133,21 +136,20 @@ const LoginAuth = (props) => {
 
                 <div>
                   <input type="text"
-                         name="username"
-                         placeholder='Login'
-                         value={data.username}
-                         className={
-                           data.username.length && errorLogin
-                             ? 'errorInput'
-                             : null
-                         }
-                         onChange={(e) =>
-                           changeDataAuth(e.target.name,
-                             e.target.value)
-                         }
+                    name="username"
+                    placeholder='Login'
+                    value={username}
+                    className={
+                      username.length && errorLogin
+                        ? 'errorInput'
+                        : null
+                    }
+                    onChange={(e) =>
+                      changeDataAuth(e.target.name, e.target.value)
+                    }
                   />
                   {
-                    data.username.length && errorLogin
+                    username.length && errorLogin
                       ? <span className='error'>
                         Login is less then 6
                       </span>
@@ -162,21 +164,21 @@ const LoginAuth = (props) => {
 
                 <div>
                   <input type="password"
-                         name="password"
-                         placeholder='Password'
-                         className={
-                           data.password && errorPass
-                             ? 'errorInput'
-                             : null
-                         }
-                         value={data.password}
-                         onChange={(e) =>
-                           changeDataAuth(e.target.name,
-                             e.target.value)
-                         }
+                    name="password"
+                    placeholder='Password'
+                    className={
+                      password && errorPass
+                        ? 'errorInput'
+                        : null
+                    }
+                    value={password}
+                    onChange={(e) =>
+                      changeDataAuth(e.target.name,
+                        e.target.value)
+                    }
                   />
                   {
-                    data.password && errorPass
+                    password && errorPass
                       ? <span className='error'>
                         Password is
                         less than 6 not contain
@@ -203,10 +205,8 @@ const LoginAuth = (props) => {
                   }}
                   variant="outlined"
                   disabled={
-                    data.username
-                    && data.password
-                      ? false
-                      : true
+                    !(username
+                      && password)
                   }
                   onClick={() => login()}
                 >
@@ -220,13 +220,13 @@ const LoginAuth = (props) => {
             }}
             >
               <ThemeProvider theme={theme}>
-                <Button onClick={() =>
-                  goRegisterPage()}
-                        sx={{
-                          color: "black",
-                          textTransform: 'none'
-                        }}
-                        variant="text"
+                <Button
+                  onClick={() =>
+                    goRegisterPage()
+                  }
+                  className='register__btn'
+                 
+                  variant="text"
                 >
                   Зарегистрироваться
                 </Button>
@@ -238,8 +238,8 @@ const LoginAuth = (props) => {
             autoHideDuration={3000}
             onClose={handleClose}
           >
-            <Alert onClose={handleClose} severity="error" sx={{width: '100%'}}>
-              {errorText}
+            <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+              Логин или пароль введён неверно
             </Alert>
           </Snackbar>
         </div>
