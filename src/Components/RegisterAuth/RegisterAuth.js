@@ -17,14 +17,10 @@ const RegisterAuth = (props) => {
     password: '',
     repPassword: ''
   });
-  const {username, password, repPassword} = data;
-
+  const { username, password, repPassword } = data;
   const [errorLogin, setErrorLogin] = useState(false);
-
   const [errorPass, setErrorPass] = useState(false);
-
   const [errorRepPass, setErrorRepPass] = useState(false);
-
   const [open, setOpen] = useState(false);
 
   const history = useHistory();
@@ -85,7 +81,7 @@ const RegisterAuth = (props) => {
     }
     setOpen(false);
   };
-
+  
   const Alert = React.forwardRef((props, ref) => {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -96,6 +92,7 @@ const RegisterAuth = (props) => {
         if (res) {
           localStorage.setItem('token', `Bearer ${res.data.token}`);
           props.setFlag(!props.flag);
+          history.push('/')
         }
       })
       .catch(err => {
@@ -161,9 +158,7 @@ const RegisterAuth = (props) => {
                     placeholder='Login'
                     value={username}
                     className={
-                      username.length && errorLogin
-                        ? 'errorInput'
-                        : null
+                      username.length && errorLogin && 'errorInput'
                     }
                     onChange={(e) =>
                       changeDataAuth(e.target.name, e.target.value)
@@ -190,9 +185,7 @@ const RegisterAuth = (props) => {
                     name="password"
                     placeholder='Password'
                     className={
-                      password && errorPass
-                        ? 'errorInput'
-                        : null
+                      password && errorPass && 'errorInput'
                     }
                     value={password}
                     onChange={(e) =>
@@ -218,9 +211,7 @@ const RegisterAuth = (props) => {
                     placeholder='Password'
                     value={repPassword}
                     className={
-                      repPassword && errorRepPass
-                        ? 'errorInput'
-                        : null
+                      repPassword && errorRepPass && 'errorInput'
                     }
                     onChange={(e) =>
                       changeDataAuth(e.target.name, e.target.value)
@@ -246,7 +237,7 @@ const RegisterAuth = (props) => {
                       && password
                       && password === repPassword)
                   }
-                  onClick={() => { register() }}
+                  onClick={() => register()}
                 >
                   Зарегистрироваться
                 </Button>

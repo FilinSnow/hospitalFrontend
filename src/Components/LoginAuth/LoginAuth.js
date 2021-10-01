@@ -18,12 +18,9 @@ const LoginAuth = (props) => {
     username: '',
     password: '',
   });
-  const {username, password} = data;
-
+  const { username, password } = data;
   const [errorLogin, setErrorLogin] = useState(false);
-
   const [errorPass, setErrorPass] = useState(false);
-
   const [open, setOpen] = useState(false);
 
   const history = useHistory();
@@ -31,20 +28,19 @@ const LoginAuth = (props) => {
   const goRegisterPage = () => {
     history.push('/register')
   };
-
   const login = () => {
     props.thunkLogin(data)
       .then((res) => {
         if (res) {
           localStorage.setItem('token', `Bearer ${res.data.token}`);
           props.setFlag(!props.flag);
+          history.push('/')
         }
       })
       .catch(err => {
         setOpen(true);
       });
   };
-
   const changeDataAuth = (nameInput, value) => {
     switch (nameInput) {
       case 'username': {
@@ -79,14 +75,12 @@ const LoginAuth = (props) => {
       }
     }
   };
-
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
     setOpen(false);
   };
-
   const Alert = React.forwardRef((props, ref) => {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -133,16 +127,13 @@ const LoginAuth = (props) => {
             <div className='input-form'>
               <label>
                 Login:
-
                 <div>
                   <input type="text"
                     name="username"
                     placeholder='Login'
                     value={username}
                     className={
-                      username.length && errorLogin
-                        ? 'errorInput'
-                        : null
+                      username.length && errorLogin && 'errorInput'
                     }
                     onChange={(e) =>
                       changeDataAuth(e.target.name, e.target.value)
@@ -167,9 +158,7 @@ const LoginAuth = (props) => {
                     name="password"
                     placeholder='Password'
                     className={
-                      password && errorPass
-                        ? 'errorInput'
-                        : null
+                      password && errorPass && 'errorInput'
                     }
                     value={password}
                     onChange={(e) =>
@@ -221,11 +210,8 @@ const LoginAuth = (props) => {
             >
               <ThemeProvider theme={theme}>
                 <Button
-                  onClick={() =>
-                    goRegisterPage()
-                  }
+                  onClick={() => goRegisterPage()}
                   className='register__btn'
-                 
                   variant="text"
                 >
                   Зарегистрироваться

@@ -480,12 +480,14 @@ button.btn__save:hover {
     margin-bottom: 15px;
   }
 }
+
 .container__filter {
   padding: 0px 24px;
   display: flex; 
   justify-content: center;
   flex-wrap: wrap;
 }
+
 @media screen and (max-width: 640px) {
   .container__btn-main {
     margin-top: 15px;
@@ -502,48 +504,51 @@ button.btn__save:hover {
     width: 220px;
   }
 }
+
 .MuiBox-root.css-ckyhk3 .css-1mkypqy-MuiButtonBase-root-MuiButton-root {
   color: black;
   text-transform: none;
 }
+
 .add-record {
   display: flex;
 }
+
 .sortBy__container {
   display: flex;
   justify-content: end;
   padding: 24px;
   flex-wrap: wrap;
 }
+
 .sortBy {
   margin-right: 18px;
   display: flex;
   flex-wrap: wrap;
 }
+
 .table__header {
-  & div:first-child {
-    width: 25%;
-  }
-  & div:nth-child(2) {
-    width: 25%;
-  }
-  & div:nth-child(3) {
-    width: 17%;
-  }
-  & div:nth-child(4) {
-    width: 21%;
-  }
-  & div:last-child {
-    width: 11%;
+  .row-table {
+    width: 20%;
   }
 } 
+.table__main {
+  .record__span {
+    width: 20%;
+  }
+  .record__btn__edit-icon {
+    width: 20%;
+  }
+}
 @media screen and (max-width: 1280px) {
   .container__btn-main .btn-main {
     margin-top: 15px;
   }
+
   .container__auth.register {
     height: 100vh;
   }
+  
   .container__main .container__auth {
     height: auto;
   }

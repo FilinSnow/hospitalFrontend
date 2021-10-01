@@ -8,6 +8,7 @@ import ListRecords from "../ListRecords/ListRecords";
 import iconPlus from '../../img/plus.svg';
 import iconAddFilter from '../../img/filterPlus.svg';
 import iconDeleteFilter from '../../img/deleteFilter.svg';
+import AuthHOC from "../../hoc/AuthHOC";
 
 const Main = (props) => {
   const [data, setData] = useState({
@@ -16,8 +17,17 @@ const Main = (props) => {
     date: '',
     complaint: ''
   });
-  const {name, doctor, date, complaint} = data;
- 
+  const [sortNameInput, setSortNameInput] = useState('');
+  const [sortDirectionInput, setSortDirectionInput] = useState('');
+  const [sortDirectionShow, setSortDirectionShow] = useState(false);
+  const [records, setRecords] = useState(props.records);
+  const [showFilter, setShowFilter] = useState(false);
+  const [filterInput, setFilterInput] = useState({
+    before: '',
+    after: '',
+  });
+  const { name, doctor, date, complaint } = data;
+
   useEffect(() => {
     props.thunkGetAllRecords();
   }, []);
@@ -25,21 +35,6 @@ const Main = (props) => {
   useEffect(() => {
     setRecords(props.records);
   }, [props.records])
-
-  const [sortNameInput, setSortNameInput] = useState('');
-
-  const [sortDirectionInput, setSortDirectionInput] = useState('');
-
-  const [sortDirectionShow, setSortDirectionShow] = useState(false);
-
-  const [records, setRecords] = useState(props.records);
-
-  const [showFilter, setShowFilter] = useState(false);
-
-  const [filterInput, setFilterInput] = useState({
-    before: '',
-    after: '',
-  });
 
   const doctors = [
     {
@@ -59,7 +54,6 @@ const Main = (props) => {
       label: 'Бирюков Евгений Евгеньевич',
     },
   ];
-
   const sortProp = [
     {
       value: 'name',
@@ -78,7 +72,6 @@ const Main = (props) => {
       label: 'None',
     },
   ];
-
   const directionName = [
     {
       value: 'asc',
@@ -440,7 +433,6 @@ const Main = (props) => {
                 </Box>
               </Box>
             }
-
           </Box>
           {
             showFilter
@@ -515,19 +507,19 @@ const Main = (props) => {
           <Box className='container__table'>
             <div className='table-content'>
               <div className="table__header">
-                <div>
+                <div className='row-table'>
                   <span>Имя</span>
                 </div>
-                <div>
+                <div className='row-table'>
                   <span>Врач</span>
                 </div>
-                <div>
+                <div className='row-table'>
                   <span>Дата</span>
                 </div>
-                <div>
+                <div className='row-table'>
                   <span>Жалобы</span>
                 </div>
-                <div>
+                <div className='row-table'>
                   <span></span>
                 </div>
               </div>
@@ -558,6 +550,6 @@ const MainContainer = connect(mapStateToProps,
     thunkCreateNewRecord,
     thunkGetAllRecords
   }
-)(Main);
+)(AuthHOC(Main));
 
 export default MainContainer;

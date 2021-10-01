@@ -1,19 +1,14 @@
 import React from "react";
 import {Redirect} from "react-router";
 
-
 const AuthHOC = (Component) => {
-  
-  const token = localStorage.getItem('token');
   const showComponent = (props) => {
-    console.log(props);
-    if (token) {
+    if (props.token) {
       return <Component {...props} />
     }
     return <Redirect to='/login'/>
-  }
-  return showComponent
+  };
+  return showComponent;
 }
-
 
 export default AuthHOC;

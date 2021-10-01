@@ -1,33 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import RegisterAuth from "./Components/RegisterAuth/RegisterAuth";
 import './App.scss';
-import { Redirect, Route, Switch, useHistory } from "react-router";
+import {Redirect, Route, Switch, useHistory} from "react-router";
 import MainContainer from "./Components/MainContainer/MainContainer";
 import LoginAuth from "./Components/LoginAuth/LoginAuth";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 
 
 const App = (props) => {
-  const history = useHistory();
-
   const [flag, setFlag] = useState(false);
-
   const token = localStorage.getItem('token');
 
   return (
     <div className="wrapper">
-      {token
-        ? <Redirect to='/' />
-        : <Redirect to='/login' />
-      }
       <Route exact path='/' component={() =>
         <MainContainer
+          token={token}
           setFlag={setFlag}
           flag={flag}
           userId={props.userId}
-        />} />
-      <Route path='/login' component={() => <LoginAuth setFlag={setFlag} flag={flag} />} />
-      <Route path='/register' component={() => <RegisterAuth setFlag={setFlag} flag={flag} />} />
+        />}/>
+      <Route path='/login' component={() => <LoginAuth setFlag={setFlag} flag={flag}/>}/>
+      <Route path='/register' component={() => <RegisterAuth setFlag={setFlag} flag={flag}/>}/>
     </div>
   );
 }

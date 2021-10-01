@@ -49,21 +49,21 @@ const ListRecords = (props) => {
           return (
             <div key={record._id} className='container__record'>
               <div className="record__span"
-                style={{ width: '25%' }}
+                
               >
                 <span>
                   {record.name}
                 </span>
               </div>
               <div className="record__span"
-                style={{ width: '25%' }}
+                
               >
                 <span>
                   {record.doctor}
                 </span>
               </div>
               <div className="record__span"
-                style={{ width: '17%' }}
+                
               >
                 <span>
                   {record.date
@@ -72,14 +72,14 @@ const ListRecords = (props) => {
                 </span>
               </div>
               <div className="record__span"
-                style={{ width: '21%' }}
+                
               >
                 <span>
                   {record.complaint}
                 </span>
               </div>
               <div className="record__btn__edit-icon"
-                style={{ width: '11%' }}
+                
               >
                 <div>
                   <IconButton aria-label="editIcon"
