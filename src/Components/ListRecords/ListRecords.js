@@ -47,39 +47,29 @@ const ListRecords = (props) => {
         props.records?.map((record, index) => {
           return (
             <div key={record._id} className='container__record'>
-              <div className="record__span"
-
-              >
+              <div className="record__span">
                 <span>
                   {record.name}
                 </span>
               </div>
-              <div className="record__span"
-
-              >
+              <div className="record__span">
                 <span>
                   {record.doctor}
                 </span>
               </div>
-              <div className="record__span"
-
-              >
+              <div className="record__span">
                 <span>
                   {record.date
                     .split('-')
                     .reverse().join('-')}
                 </span>
               </div>
-              <div className="record__span"
-
-              >
+              <div className="record__span">
                 <span>
                   {record.complaint}
                 </span>
               </div>
-              <div className="record__btn__edit-icon"
-
-              >
+              <div className="record__btn__edit-icon">
                 <div>
                   <IconButton aria-label="editIcon"
                     onClick={() => {
@@ -104,19 +94,15 @@ const ListRecords = (props) => {
               </div>
             </div>
           );
-
-
         })
       }
     </>
   );
 }
 
-
 export default connect(null,
   {
     thunkChangeInfoRecord,
     thunkDeleteRecord
   }
-)
-  (ListRecords);
+)(ListRecords);

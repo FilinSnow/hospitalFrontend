@@ -12,7 +12,7 @@ const App = (props) => {
 
   return (
     <div className="wrapper">
-      <Route exact path='/' component={() =>
+      <Route exact path='/main' component={() =>
         <MainContainer
           token={token}
           setFlag={setFlag}
@@ -21,6 +21,7 @@ const App = (props) => {
         />} />
       <Route path='/login' component={() => <LoginAuth setFlag={setFlag} flag={flag} />} />
       <Route path='/register' component={() => <RegisterAuth setFlag={setFlag} flag={flag} />} />
+      <Redirect to='/main' />
     </div>
   );
 }

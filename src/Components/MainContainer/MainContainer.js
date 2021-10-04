@@ -54,6 +54,7 @@ const Main = (props) => {
       label: 'Бирюков Евгений Евгеньевич',
     },
   ];
+  
   const sortProp = [
     {
       value: 'name',
@@ -72,6 +73,7 @@ const Main = (props) => {
       label: 'None',
     },
   ];
+
   const directionName = [
     {
       value: 'asc',

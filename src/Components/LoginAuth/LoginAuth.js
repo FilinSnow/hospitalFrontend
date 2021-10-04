@@ -28,19 +28,21 @@ const LoginAuth = (props) => {
   const goRegisterPage = () => {
     history.push('/register')
   };
+
   const login = () => {
     props.thunkLogin(data)
       .then((res) => {
         if (res) {
           localStorage.setItem('token', `Bearer ${res.data.token}`);
           props.setFlag(!props.flag);
-          history.push('/')
+          history.push('/main')
         }
       })
       .catch(err => {
         setOpen(true);
       });
   };
+  
   const changeDataAuth = (nameInput, value) => {
     switch (nameInput) {
       case 'username': {
@@ -75,15 +77,18 @@ const LoginAuth = (props) => {
       }
     }
   };
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
     setOpen(false);
   };
+
   const Alert = React.forwardRef((props, ref) => {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
+
   const theme = createTheme({
     palette: {
       primary: {

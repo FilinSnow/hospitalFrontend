@@ -92,7 +92,7 @@ const RegisterAuth = (props) => {
         if (res) {
           localStorage.setItem('token', `Bearer ${res.data.token}`);
           props.setFlag(!props.flag);
-          history.push('/')
+          history.push('/main')
         }
       })
       .catch(err => {

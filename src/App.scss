@@ -298,8 +298,7 @@ input {
   .container__content {
     background: white;
     width: 642px;
-    border-radius: 3px 3px 0 0;
-
+    border-radius: 3px;
     .content__header {
       padding: 24px 0 24px 40px;
       border-radius: 3px 3px 0 0;
@@ -311,6 +310,21 @@ input {
 .container__edit-record {
   padding: 24px;
   margin-top: 10px;
+}
+
+.btn__cancel.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
+  padding: 5px 45px;
+  margin-right: 12px;
+  text-transform: none;
+  border: 1px solid grey;
+  color: black;
+}
+
+.btn__save.css-sghohy-MuiButtonBase-root-MuiButton-root {
+  padding: 5px 45px;
+  text-transform: none;
+  color: black;
+  background: rgba(197, 233, 255, 0.72);
 }
 
 button.btn__cancel:hover {
@@ -488,6 +502,15 @@ button.btn__save:hover {
   flex-wrap: wrap;
 }
 
+.container__delete {
+  padding: 24px 0 0 40px;
+  margin-bottom: 80px;
+
+  span {
+    font-size: 24px;
+  }
+}
+
 @media screen and (max-width: 640px) {
   .container__btn-main {
     margin-top: 15px;
@@ -532,6 +555,7 @@ button.btn__save:hover {
     width: 20%;
   }
 }
+
 .table__main {
   .record__span {
     width: 20%;
@@ -540,6 +564,15 @@ button.btn__save:hover {
     width: 20%;
   }
 }
+
+.btn__container__del-cancel {
+  display: flex;
+  justify-content: end;
+  padding: 24px;
+  box-shadow: 0px -4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 0 0 3px 3px;
+}
+
 @media screen and (max-width: 1280px) {
   .container__btn-main .btn-main {
     margin-top: 15px;
