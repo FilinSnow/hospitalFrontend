@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { connect } from "react-redux";
@@ -49,21 +48,21 @@ const ListRecords = (props) => {
           return (
             <div key={record._id} className='container__record'>
               <div className="record__span"
-                
+
               >
                 <span>
                   {record.name}
                 </span>
               </div>
               <div className="record__span"
-                
+
               >
                 <span>
                   {record.doctor}
                 </span>
               </div>
               <div className="record__span"
-                
+
               >
                 <span>
                   {record.date
@@ -72,14 +71,14 @@ const ListRecords = (props) => {
                 </span>
               </div>
               <div className="record__span"
-                
+
               >
                 <span>
                   {record.complaint}
                 </span>
               </div>
               <div className="record__btn__edit-icon"
-                
+
               >
                 <div>
                   <IconButton aria-label="editIcon"
@@ -88,7 +87,6 @@ const ListRecords = (props) => {
                       setEditMode(true);
                     }}
                   >
-
                     <EditIcon />
                   </IconButton>
                 </div>
@@ -100,7 +98,6 @@ const ListRecords = (props) => {
                       setDeleteMode(true);
                     }}
                   >
-
                     <DeleteIcon />
                   </IconButton>
                 </div>

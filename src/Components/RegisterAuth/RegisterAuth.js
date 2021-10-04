@@ -81,7 +81,7 @@ const RegisterAuth = (props) => {
     }
     setOpen(false);
   };
-  
+
   const Alert = React.forwardRef((props, ref) => {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });

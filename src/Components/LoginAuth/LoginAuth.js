@@ -84,7 +84,6 @@ const LoginAuth = (props) => {
   const Alert = React.forwardRef((props, ref) => {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-
   const theme = createTheme({
     palette: {
       primary: {

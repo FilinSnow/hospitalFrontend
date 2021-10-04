@@ -2,10 +2,8 @@ import React from "react";
 import { Box } from "@mui/system";
 import { Button } from "@mui/material";
 
-
 const PopupDelete = (props) => {
   const record = props?.records[props.id];
-
 
   const deleteRecord = () => {
     props.setDeleteMode(false);

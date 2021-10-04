@@ -23,7 +23,7 @@ const ReceptionMainReducer = (state = initialState, action) => {
       }
     }
     default: {
-      return {...state};
+      return { ...state };
     }
   }
 }
